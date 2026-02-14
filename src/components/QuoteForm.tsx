@@ -1,0 +1,438 @@
+'use client';
+
+import { useState } from 'react';
+import { products } from '@/data/products';
+import { getCountryByCode, Country, francophoneCountries, africaCountries, worldCountries } from '@/data/countries';
+
+interface QuoteFormProps {
+  preselectedModel?: string;
+}
+
+export default function QuoteForm({ preselectedModel }: QuoteFormProps) {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    company: '',
+    country: '',
+    phone: '',
+    email: '',
+    model: preselectedModel || '',
+    version: '',
+    quantity: 1,
+    message: ''
+  });
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === 'quantity' ? parseInt(value) || 1 : value
+    }));
+  };
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const countryCode = e.target.value;
+    const country = getCountryByCode(countryCode);
+    setSelectedCountry(country || null);
+    setFormData(prev => ({
+      ...prev,
+      country: countryCode,
+      phone: '' // Reset phone when country changes
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    // Combine dial code with phone number
+    const fullPhone = selectedCountry ? `${selectedCountry.dial} ${formData.phone}` : formData.phone;
+
+    try {
+      const response = await fetch('/api/quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          phone: fullPhone,
+          country: selectedCountry?.name || formData.country
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({
+          fullName: '',
+          company: '',
+          country: '',
+          phone: '',
+          email: '',
+          model: '',
+          version: '',
+          quantity: 1,
+          message: ''
+        });
+        setSelectedCountry(null);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const inputStyle = {
+    width: '100%',
+    padding: '14px 16px',
+    border: '1px solid #E5E7EB',
+    borderRadius: '8px',
+    fontSize: '1rem',
+    transition: 'all 0.2s ease',
+    backgroundColor: 'white'
+  };
+
+  const labelStyle = {
+    display: 'block',
+    fontWeight: '600',
+    marginBottom: '6px',
+    color: '#374151',
+    fontSize: '0.875rem'
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      {submitStatus === 'success' && (
+        <div
+          style={{
+            padding: '16px',
+            backgroundColor: '#F0FDF4',
+            border: '1px solid #BBF7D0',
+            borderRadius: '8px'
+          }}
+        >
+          <div className="flex items-start" style={{ gap: '12px' }}>
+            <svg
+              style={{ width: '20px', height: '20px', color: '#22C55E', marginTop: '2px', flexShrink: 0 }}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <h4 style={{ fontSize: '0.875rem', fontWeight: '600', color: '#166534' }}>Demande envoyée avec succès !</h4>
+              <p style={{ fontSize: '0.875rem', color: '#15803D', marginTop: '4px' }}>
+                Notre équipe commerciale vous contactera dans les plus brefs délais.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {submitStatus === 'error' && (
+        <div
+          style={{
+            padding: '16px',
+            backgroundColor: '#FEF2F2',
+            border: '1px solid #FECACA',
+            borderRadius: '8px'
+          }}
+        >
+          <div className="flex items-start" style={{ gap: '12px' }}>
+            <svg
+              style={{ width: '20px', height: '20px', color: '#EF4444', marginTop: '2px', flexShrink: 0 }}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            <div>
+              <h4 style={{ fontSize: '0.875rem', fontWeight: '600', color: '#991B1B' }}>Erreur lors de l&apos;envoi</h4>
+              <p style={{ fontSize: '0.875rem', color: '#B91C1C', marginTop: '4px' }}>
+                Veuillez réessayer ou nous contacter directement par WhatsApp.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: '20px' }}>
+        {/* Nom complet */}
+        <div>
+          <label htmlFor="fullName" style={labelStyle}>
+            Nom complet <span style={{ color: '#EF4444' }}>*</span>
+          </label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
+            required
+            style={inputStyle}
+            placeholder="Votre nom complet"
+          />
+        </div>
+
+        {/* Société */}
+        <div>
+          <label htmlFor="company" style={labelStyle}>
+            Société <span style={{ color: '#EF4444' }}>*</span>
+          </label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            value={formData.company}
+            onChange={handleChange}
+            required
+            style={inputStyle}
+            placeholder="Nom de votre société"
+          />
+        </div>
+
+        {/* Pays */}
+        <div>
+          <label htmlFor="country" style={labelStyle}>
+            Pays <span style={{ color: '#EF4444' }}>*</span>
+          </label>
+          <select
+            id="country"
+            name="country"
+            value={formData.country}
+            onChange={handleCountryChange}
+            required
+            style={inputStyle}
+          >
+            <option value="">Sélectionnez votre pays</option>
+            <optgroup label="🌍 Afrique francophone">
+              {francophoneCountries.map(country => (
+                <option key={country.code} value={country.code}>
+                  {country.flag} {country.name}
+                </option>
+              ))}
+            </optgroup>
+            <optgroup label="🌍 Autres pays africains">
+              {africaCountries.map(country => (
+                <option key={country.code} value={country.code}>
+                  {country.flag} {country.name}
+                </option>
+              ))}
+            </optgroup>
+            <optgroup label="🌐 Tous les autres pays">
+              {worldCountries.map(country => (
+                <option key={country.code} value={country.code}>
+                  {country.flag} {country.name}
+                </option>
+              ))}
+            </optgroup>
+          </select>
+        </div>
+
+        {/* Téléphone avec préfixe */}
+        <div>
+          <label htmlFor="phone" style={labelStyle}>
+            Téléphone / WhatsApp <span style={{ color: '#EF4444' }}>*</span>
+          </label>
+          <div
+            style={{
+              display: 'flex',
+              border: '1px solid #E5E7EB',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              transition: 'all 0.2s ease'
+            }}
+            className="phone-input-container"
+          >
+            {/* Préfixe */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '14px 16px',
+                backgroundColor: '#F9FAFB',
+                borderRight: '1px solid #E5E7EB',
+                fontWeight: '600',
+                color: '#374151',
+                fontSize: '1rem',
+                whiteSpace: 'nowrap',
+                userSelect: 'none',
+                minWidth: '90px'
+              }}
+            >
+              {selectedCountry ? (
+                <>
+                  <span style={{ fontSize: '1.2rem' }}>{selectedCountry.flag}</span>
+                  <span>{selectedCountry.dial}</span>
+                </>
+              ) : (
+                <span style={{ color: '#9CA3AF' }}>+XXX</span>
+              )}
+            </div>
+            {/* Input */}
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              placeholder={selectedCountry ? "XX XXX XX XX" : "Sélectionnez un pays"}
+              disabled={!selectedCountry}
+              style={{
+                flex: 1,
+                padding: '14px 16px',
+                border: 'none',
+                outline: 'none',
+                fontSize: '1rem',
+                backgroundColor: selectedCountry ? 'white' : '#F9FAFB'
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Email */}
+        <div>
+          <label htmlFor="email" style={labelStyle}>
+            Email <span style={{ color: '#EF4444' }}>*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            style={inputStyle}
+            placeholder="votre@email.com"
+          />
+        </div>
+
+        {/* Modèle */}
+        <div>
+          <label htmlFor="model" style={labelStyle}>
+            Modèle demandé <span style={{ color: '#EF4444' }}>*</span>
+          </label>
+          <select
+            id="model"
+            name="model"
+            value={formData.model}
+            onChange={handleChange}
+            required
+            style={inputStyle}
+          >
+            <option value="">Sélectionnez un modèle</option>
+            {products.map(product => (
+              <option key={product.id} value={product.name}>{product.name}</option>
+            ))}
+            <option value="Autre">Autre (préciser dans le message)</option>
+          </select>
+        </div>
+
+        {/* Version souhaitée */}
+        <div>
+          <label htmlFor="version" style={labelStyle}>
+            Version souhaitée <span style={{ color: '#EF4444' }}>*</span>
+          </label>
+          <select
+            id="version"
+            name="version"
+            value={formData.version}
+            onChange={handleChange}
+            required
+            style={inputStyle}
+          >
+            <option value="">Sélectionnez une version</option>
+            <option value="neuf">Neuf</option>
+            <option value="renove">Rénové</option>
+            <option value="les_deux">Les deux (Neuf et Rénové)</option>
+          </select>
+        </div>
+
+        {/* Quantité */}
+        <div>
+          <label htmlFor="quantity" style={labelStyle}>
+            Quantité <span style={{ color: '#EF4444' }}>*</span>
+          </label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            value={formData.quantity}
+            onChange={handleChange}
+            min="1"
+            required
+            style={inputStyle}
+          />
+        </div>
+
+        {/* Message */}
+        <div className="md:col-span-2">
+          <label htmlFor="message" style={labelStyle}>
+            Message / Spécifications
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            rows={4}
+            style={{
+              ...inputStyle,
+              minHeight: '120px',
+              resize: 'none'
+            }}
+            placeholder="Précisez vos besoins spécifiques (couleur, options, destination...)"
+          />
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="inline-flex items-center justify-center font-semibold text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        style={{
+          width: '100%',
+          padding: '16px 24px',
+          backgroundColor: '#0177ED',
+          borderRadius: '8px',
+          fontSize: '1rem',
+          border: 'none',
+          cursor: isSubmitting ? 'not-allowed' : 'pointer'
+        }}
+      >
+        {isSubmitting ? (
+          <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+            Envoi en cours...
+          </span>
+        ) : (
+          'Envoyer ma demande de devis'
+        )}
+      </button>
+
+      <p style={{ fontSize: '0.75rem', color: '#6B7280', textAlign: 'center' }}>
+        En soumettant ce formulaire, vous acceptez d&apos;être contacté par notre équipe commerciale.
+      </p>
+
+      <style jsx>{`
+        .phone-input-container:focus-within {
+          border-color: #0177ED;
+          box-shadow: 0 0 0 3px rgba(1, 119, 237, 0.1);
+        }
+      `}</style>
+    </form>
+  );
+}

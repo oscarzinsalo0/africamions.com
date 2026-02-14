@@ -21,10 +21,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
       href={`/catalogue/${product.slug}`}
-      className="block bg-white overflow-hidden"
+      className="block bg-white"
       style={{
         borderRadius: '12px',
         border: '1px solid #E5E7EB',
+        overflow: 'hidden',
         cursor: 'pointer',
         transition: 'transform 0.2s ease, box-shadow 0.2s ease'
       }}
@@ -38,18 +39,17 @@ export default function ProductCard({ product }: ProductCardProps) {
       }}
     >
       {/* Image Container */}
-      <div className="relative r-product-img" style={{ height: '250px' }}>
+      <div className="r-product-img" style={{ position: 'relative', overflow: 'hidden', height: '250px' }}>
         <Image
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover"
+          style={{ objectFit: 'cover' }}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         {/* Badges - Marque + Neuf + Rénové */}
         <div
-          className="absolute flex flex-wrap"
-          style={{ top: '12px', left: '12px', gap: '6px', zIndex: 10 }}
+          style={{ position: 'absolute', top: '12px', left: '12px', display: 'flex', flexWrap: 'wrap', gap: '6px', zIndex: 10 }}
         >
           {/* Badge Marque */}
           <span

@@ -11,9 +11,10 @@ export default function FicheTechniqueSection() {
       <section className="r-section" style={{ padding: '100px 0' }}>
         <div className="container-custom">
           <div
-            className="mx-auto r-fiche-box"
+            className="r-fiche-box"
             style={{
               maxWidth: '900px',
+              margin: '0 auto',
               padding: '60px 40px',
               background: 'linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%)',
               border: '1px solid #E5E7EB',

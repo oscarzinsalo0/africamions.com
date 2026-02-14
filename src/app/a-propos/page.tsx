@@ -394,8 +394,9 @@ export default function AboutPage() {
       <section className="r-section" style={{ padding: '100px 0' }}>
         <div className="container-custom">
           <div
-            className="text-center bg-gray-50 px-6 py-10 sm:px-12 sm:py-16"
+            className="text-center bg-gray-50 r-cta-box"
             style={{
+              padding: '64px 48px',
               borderRadius: '16px',
               maxWidth: '900px',
               margin: '0 auto'

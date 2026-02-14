@@ -80,7 +80,7 @@ export default async function ProductPage({ params }: Props) {
       </div>
 
       {/* Product Detail */}
-      <section className="py-8 sm:py-12 lg:py-16 pb-16 sm:pb-20 lg:pb-24">
+      <section className="r-section" style={{ paddingTop: '64px', paddingBottom: '96px' }}>
         <div className="container-custom">
           <div className="grid lg:grid-cols-2" style={{ gap: '48px' }}>
             {/* Image Gallery */}

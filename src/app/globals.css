@@ -476,6 +476,11 @@ section .section-description {
     text-align: center;
   }
 
+  /* CTA box (about page) */
+  .r-cta-box {
+    padding: 40px 24px !important;
+  }
+
   /* Fiche technique section */
   .r-fiche-box {
     padding: 40px 20px !important;

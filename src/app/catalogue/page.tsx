@@ -48,7 +48,7 @@ export default function CataloguePage() {
       </section>
 
       {/* Filters & Products */}
-      <section className="py-10 sm:py-14 lg:py-16 pb-16 sm:pb-20 lg:pb-24">
+      <section className="r-section" style={{ paddingTop: '64px', paddingBottom: '96px' }}>
         <div className="container-custom">
           {/* Filters Container */}
           <div
@@ -193,7 +193,7 @@ export default function CataloguePage() {
       </section>
 
       {/* PDF Banner - après les produits */}
-      <section className="pb-12 sm:pb-16 lg:pb-20">
+      <section style={{ paddingBottom: '80px' }}>
         <div className="container-custom">
           <CataloguePDFBanner />
         </div>

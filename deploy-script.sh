@@ -59,6 +59,7 @@ NEXT_PUBLIC_WHATSAPP_NUMBER=8618716342426
 NEXT_PUBLIC_CONTACT_EMAIL=contact@africamions.com
 ENVEOF
 
+rm -f package-lock.json
 npm install
 npm run build
 

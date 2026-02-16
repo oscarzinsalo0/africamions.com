@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { getCountryByCode, Country, francophoneCountries, africaCountries, worldCountries } from '@/data/countries';
 
 export default function ContactForm() {
@@ -15,6 +15,7 @@ export default function ContactForm() {
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const formTopRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -69,11 +70,20 @@ export default function ContactForm() {
           message: ''
         });
         setSelectedCountry(null);
+        setTimeout(() => {
+          formTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
       } else {
         setSubmitStatus('error');
+        setTimeout(() => {
+          formTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
       }
     } catch {
       setSubmitStatus('error');
+      setTimeout(() => {
+        formTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
     } finally {
       setIsSubmitting(false);
     }
@@ -107,6 +117,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <div ref={formTopRef} />
       {submitStatus === 'success' && (
         <div
           style={{

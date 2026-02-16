@@ -13,7 +13,7 @@ export default function Home() {
     <>
       {/* Hero Section - Premium E-commerce Design */}
       <section
-        className="relative min-h-screen flex items-center hero-pattern"
+        className="relative min-h-screen flex items-center hero-pattern r-hero"
         style={{
           background: 'linear-gradient(135deg, #FFFFFF 0%, #F0F4FF 50%, #E8F0FE 100%)',
           paddingTop: '80px',
@@ -26,7 +26,7 @@ export default function Home() {
             <div className="text-center lg:text-left">
               {/* Badge Exportateur */}
               <div
-                className="inline-flex items-center bg-white mb-8"
+                className="inline-flex items-center bg-white mb-8 r-hero-badge"
                 style={{
                   padding: '8px 20px',
                   borderRadius: '50px',
@@ -34,7 +34,8 @@ export default function Home() {
                 }}
               >
                 <span
-                  className="w-2 h-2 bg-[#10B981] rounded-full mr-3 animate-pulse-dot"
+                  className="w-2 h-2 bg-[#10B981] rounded-full animate-pulse-dot"
+                  style={{ marginRight: '10px' }}
                 ></span>
                 <span style={{ fontSize: '0.875rem', fontWeight: '500', color: '#374151' }}>
                   Exportateur direct usine
@@ -341,7 +342,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3" style={{ gap: '24px' }}>
+          <div className="grid grid-cols-2 lg:grid-cols-3" style={{ gap: '16px' }}>
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -363,7 +364,7 @@ export default function Home() {
           </div>
 
           <div className="relative">
-            {/* Connecting line */}
+            {/* Connecting line - desktop horizontal */}
             <div
               className="hidden lg:block absolute top-6 left-0 right-0 h-0.5 bg-gray-200"
               style={{
@@ -373,27 +374,39 @@ export default function Home() {
               }}
             ></div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 relative" style={{ gap: '32px' }}>
+            {/* Desktop: 4 columns / Mobile: timeline */}
+            <div className="r-process-grid grid lg:grid-cols-4 relative" style={{ gap: '32px' }}>
               {[
-                { step: 1, title: 'Demande de devis', desc: 'Sélectionnez vos modèles et envoyez votre demande de devis personnalisé' },
-                { step: 2, title: 'Offre commerciale', desc: 'Recevez une offre détaillée avec prix FOB, photos et spécifications' },
-                { step: 3, title: 'Confirmation', desc: 'Validez la commande et effectuez le paiement selon les termes convenus' },
-                { step: 4, title: 'Expédition', desc: "Suivi de l'expédition maritime jusqu'au port de destination" }
-              ].map((item) => (
-                <div key={item.step} className="text-center relative z-10">
+                { step: 1, title: 'Demande de devis', desc: 'Sélectionnez vos modèles et envoyez votre demande de devis personnalisé', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+                { step: 2, title: 'Offre commerciale', desc: 'Recevez une offre détaillée avec prix FOB, photos et spécifications', icon: 'M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z' },
+                { step: 3, title: 'Confirmation', desc: 'Validez la commande et effectuez le paiement selon les termes convenus', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
+                { step: 4, title: 'Expédition', desc: "Suivi de l'expédition maritime jusqu'au port de destination", icon: 'M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0' }
+              ].map((item, index) => (
+                <div key={item.step} className="r-process-step text-center relative z-10">
+                  {/* Mobile: vertical line between steps */}
+                  {index < 3 && (
+                    <div className="r-process-line lg:hidden" />
+                  )}
                   <div
-                    className="flex items-center justify-center mx-auto mb-4 text-white font-bold bg-[#0177ED]"
+                    className="r-process-circle flex items-center justify-center mx-auto mb-4 text-white font-bold bg-[#0177ED]"
                     style={{
                       width: '48px',
                       height: '48px',
                       borderRadius: '50%',
-                      fontSize: '1.125rem'
+                      fontSize: '1.125rem',
+                      boxShadow: '0 4px 14px rgba(1, 119, 237, 0.3)'
                     }}
                   >
                     {item.step}
                   </div>
-                  <h3 className="text-lg font-semibold text-[#111827] mb-2">{item.title}</h3>
-                  <p className="text-sm text-[#6B7280] leading-relaxed">
+                  {/* Icon for mobile */}
+                  <div className="r-process-icon hidden">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0177ED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={item.icon} />
+                    </svg>
+                  </div>
+                  <h3 className="r-process-title text-lg font-semibold text-[#111827] mb-2">{item.title}</h3>
+                  <p className="r-process-desc text-sm text-[#6B7280] leading-relaxed">
                     {item.desc}
                   </p>
                 </div>

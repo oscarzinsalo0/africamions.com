@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Product } from '@/types';
 
 interface ProductCardProps {
@@ -10,14 +9,6 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const router = useRouter();
-
-  const handleDevisClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    router.push(`/devis?model=${encodeURIComponent(product.name)}`);
-  };
-
   return (
     <Link
       href={`/catalogue/${product.slug}`}
@@ -39,48 +30,49 @@ export default function ProductCard({ product }: ProductCardProps) {
       }}
     >
       {/* Image Container */}
-      <div className="r-product-img" style={{ position: 'relative', overflow: 'hidden', height: '250px' }}>
+      <div className="r-product-img" style={{ position: 'relative', overflow: 'hidden', height: '250px', backgroundColor: '#ffffff', borderBottom: '1px solid #F3F4F6' }}>
         <Image
           src={product.image}
           alt={product.name}
           fill
-          style={{ objectFit: 'cover' }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ objectFit: 'contain', padding: '12px' }}
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
         />
-        {/* Badges - Marque + Neuf + Rénové */}
+        {/* Badges */}
         <div
-          style={{ position: 'absolute', top: '12px', left: '12px', display: 'flex', flexWrap: 'wrap', gap: '6px', zIndex: 10 }}
+          className="r-card-badges"
+          style={{ position: 'absolute', top: '10px', left: '10px', display: 'flex', flexWrap: 'wrap', gap: '4px', zIndex: 10 }}
         >
-          {/* Badge Marque */}
           <span
-            className="text-xs font-semibold"
+            className="r-card-badge font-semibold"
             style={{
-              padding: '4px 12px',
+              padding: '3px 10px',
               borderRadius: '20px',
               backgroundColor: '#F3F4F6',
-              color: '#374151'
+              color: '#374151',
+              fontSize: '0.7rem'
             }}
           >
             {product.brand}
           </span>
-          {/* Badge Neuf */}
           <span
-            className="text-xs font-semibold text-white"
+            className="r-card-badge font-semibold text-white"
             style={{
-              padding: '4px 12px',
+              padding: '3px 10px',
               borderRadius: '20px',
-              backgroundColor: '#10B981'
+              backgroundColor: '#10B981',
+              fontSize: '0.7rem'
             }}
           >
             Neuf
           </span>
-          {/* Badge Rénové */}
           <span
-            className="text-xs font-semibold text-white"
+            className="r-card-badge font-semibold text-white"
             style={{
-              padding: '4px 12px',
+              padding: '3px 10px',
               borderRadius: '20px',
-              backgroundColor: '#0177ED'
+              backgroundColor: '#0177ED',
+              fontSize: '0.7rem'
             }}
           >
             Rénové
@@ -89,10 +81,10 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Content */}
-      <div style={{ padding: '20px' }}>
+      <div className="r-card-content" style={{ padding: '20px' }}>
         {/* Category */}
         <p
-          className="uppercase font-semibold text-[#0177ED] mb-2"
+          className="r-card-category uppercase font-semibold text-[#0177ED] mb-2"
           style={{ fontSize: '0.75rem', letterSpacing: '0.5px' }}
         >
           {product.category} • {product.driveType}
@@ -100,14 +92,14 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Title */}
         <h3
-          className="font-semibold text-[#111827] mb-4 line-clamp-2"
+          className="r-card-title font-semibold text-[#111827] mb-4 line-clamp-2"
           style={{ fontSize: '1.125rem', lineHeight: '1.4' }}
         >
           {product.name}
         </h3>
 
-        {/* Specs */}
-        <div className="flex flex-wrap" style={{ gap: '8px', marginBottom: '24px' }}>
+        {/* Specs - hidden on small mobile */}
+        <div className="r-card-specs flex flex-wrap" style={{ gap: '8px', marginBottom: '24px' }}>
           <span
             className="text-xs font-medium text-[#6B7280] bg-gray-100"
             style={{ padding: '6px 12px', borderRadius: '6px' }}
@@ -122,22 +114,18 @@ export default function ProductCard({ product }: ProductCardProps) {
           </span>
         </div>
 
-        {/* Buttons - flex: 1, same width */}
-        <div className="flex" style={{ gap: '8px' }}>
-          <span
-            className="flex-1 inline-flex items-center justify-center text-sm font-semibold text-[#111827] bg-gray-100"
-            style={{ padding: '12px 16px', borderRadius: '8px' }}
-          >
-            Voir détails
-          </span>
-          <button
-            onClick={handleDevisClick}
-            className="flex-1 inline-flex items-center justify-center text-sm font-semibold text-white bg-[#0177ED] hover:bg-[#0165CC] transition-colors"
-            style={{ padding: '12px 16px', borderRadius: '8px', border: 'none', cursor: 'pointer' }}
-          >
-            Devis
-          </button>
-        </div>
+        {/* Button */}
+        <span
+          className="r-card-buttons inline-flex items-center justify-center text-sm font-semibold text-white"
+          style={{
+            width: '100%',
+            padding: '12px 16px',
+            borderRadius: '8px',
+            backgroundColor: '#0177ED',
+          }}
+        >
+          Voir détails
+        </span>
       </div>
     </Link>
   );

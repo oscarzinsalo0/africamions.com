@@ -150,8 +150,8 @@ export default function CataloguePage() {
           {/* Products Grid - 3 columns on desktop, 2 on tablet, 1 on mobile */}
           {filteredProducts.length > 0 ? (
             <div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-              style={{ gap: '24px' }}
+              className="grid grid-cols-2 lg:grid-cols-3"
+              style={{ gap: '16px' }}
             >
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />

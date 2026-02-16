@@ -83,13 +83,13 @@ export async function POST(request: Request) {
 
         <!-- Header -->
         <tr>
-          <td class="header" style="background:linear-gradient(135deg, #0177ED 0%, #0165CC 100%);padding:28px 30px;">
+          <td class="header" style="background:linear-gradient(135deg, #0177ED 0%, #0165CC 100%);padding:28px 30px;text-align:center;">
             <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
-                <td style="color:#ffffff;font-size:24px;font-weight:bold;letter-spacing:0.5px;">AFRICAMIONS</td>
+                <td style="color:#ffffff;font-size:24px;font-weight:bold;letter-spacing:0.5px;text-align:center;">AFRICAMIONS</td>
               </tr>
               <tr>
-                <td style="color:rgba(255,255,255,0.9);font-size:14px;padding-top:8px;">Message reçu via le formulaire de contact</td>
+                <td style="color:rgba(255,255,255,0.9);font-size:14px;padding-top:8px;text-align:center;">Message reçu via le formulaire de contact</td>
               </tr>
             </table>
           </td>

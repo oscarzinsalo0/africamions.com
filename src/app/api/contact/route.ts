@@ -50,22 +50,25 @@ export async function POST(request: Request) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="x-apple-disable-message-reformatting">
   <style>
+    body { margin: 0; padding: 0; }
+    table { border-collapse: collapse; }
     @media only screen and (max-width: 600px) {
-      .wrapper { width: 100% !important; }
+      .wrapper { width: 100% !important; max-width: 100% !important; }
       .content { padding: 20px !important; }
       .header { padding: 20px !important; }
       .two-col { display: block !important; width: 100% !important; }
       .label-col { width: 100% !important; display: block !important; padding: 8px 12px !important; font-weight: 600 !important; }
       .value-col { width: 100% !important; display: block !important; padding: 8px 12px 16px 12px !important; }
-      .cta-btn { padding: 14px 20px !important; font-size: 15px !important; }
+      .cta-btn { padding: 14px 20px !important; font-size: 15px !important; width: auto !important; display: inline-block !important; }
     }
   </style>
 </head>
 <body style="margin:0;padding:0;background-color:#f4f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f5f7;padding:20px 0;">
+  <center>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f5f7;padding:20px 0;">
     <tr><td align="center">
       <!-- Badge de notification -->
-      <table cellpadding="0" cellspacing="0" style="margin-bottom:16px;">
+      <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 16px auto;">
         <tr><td align="center">
           <div style="display:inline-block;background-color:#8B5CF6;color:#ffffff;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;letter-spacing:0.5px;">
             💬 NOUVEAU MESSAGE DE CONTACT
@@ -74,7 +77,7 @@ export async function POST(request: Request) {
       </table>
 
       <!-- Container principal -->
-      <table class="wrapper" width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.08);max-width:600px;">
+      <table class="wrapper" width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.08);max-width:600px;margin:0 auto;">
 
         <!-- Header -->
         <tr>
@@ -95,7 +98,7 @@ export async function POST(request: Request) {
           <td class="content" style="padding:32px 30px;">
 
             <!-- Section Sujet en avant -->
-            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;background-color:#f0f7ff;border-left:4px solid #0177ED;border-radius:8px;padding:16px 20px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;background-color:#f0f7ff;border-left:4px solid #0177ED;border-radius:8px;padding:16px 20px;">
               <tr>
                 <td>
                   <p style="margin:0 0 4px;color:#6b7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">SUJET</p>
@@ -105,7 +108,7 @@ export async function POST(request: Request) {
             </table>
 
             <!-- Section Contact -->
-            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;">
               <tr>
                 <td style="padding-bottom:12px;">
                   <h2 style="margin:0;color:#111827;font-size:18px;font-weight:700;">
@@ -115,7 +118,7 @@ export async function POST(request: Request) {
               </tr>
             </table>
 
-            <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:28px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:28px;">
               <tr style="background-color:#f9fafb;">
                 <td class="label-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#6b7280;font-size:13px;width:160px;font-weight:500;">Nom</td>
                 <td class="value-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#111827;font-size:15px;font-weight:600;">${s.name}</td>
@@ -135,7 +138,7 @@ export async function POST(request: Request) {
             </table>
 
             <!-- Section Message -->
-            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;">
               <tr>
                 <td style="padding-bottom:12px;">
                   <h2 style="margin:0;color:#111827;font-size:18px;font-weight:700;">
@@ -145,7 +148,7 @@ export async function POST(request: Request) {
               </tr>
             </table>
 
-            <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:28px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:28px;">
               <tr>
                 <td style="padding:16px 20px;color:#111827;font-size:15px;line-height:1.7;background-color:#fafafa;">
                   ${s.message}
@@ -154,7 +157,7 @@ export async function POST(request: Request) {
             </table>
 
             <!-- CTA Répondre -->
-            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
               <tr>
                 <td align="center" style="padding:20px;background-color:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
                   <p style="margin:0 0 12px;color:#166534;font-size:14px;font-weight:600;">Répondre à ${s.name} :</p>
@@ -191,6 +194,7 @@ export async function POST(request: Request) {
       </table>
     </td></tr>
   </table>
+  </center>
 </body>
 </html>`;
 
@@ -200,7 +204,7 @@ export async function POST(request: Request) {
 <html lang="fr">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
 <body style="margin:0;padding:0;background-color:#f4f5f7;font-family:Arial,Helvetica,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f5f7;padding:30px 0;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f5f7;padding:30px 0;">
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
         <!-- Header -->
@@ -218,7 +222,7 @@ export async function POST(request: Request) {
             </p>
 
             <!-- Recap box -->
-            <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;overflow:hidden;margin:0 0 24px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;overflow:hidden;margin:0 0 24px;">
               <tr>
                 <td style="padding:16px 20px 8px;">
                   <p style="margin:0;color:#0177ED;font-size:14px;font-weight:600;">Votre message</p>
@@ -233,7 +237,7 @@ export async function POST(request: Request) {
             </table>
 
             <!-- WhatsApp CTA -->
-            <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;">
               <tr>
                 <td style="background-color:#f9fafb;border-radius:8px;padding:16px 20px;text-align:center;">
                   <p style="margin:0 0 8px;color:#4b5563;font-size:14px;">Pour toute urgence, contactez-nous sur WhatsApp :</p>

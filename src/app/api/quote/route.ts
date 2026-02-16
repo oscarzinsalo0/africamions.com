@@ -167,7 +167,7 @@ export async function POST(request: Request) {
               </tr>
               <tr style="background-color:#f9fafb;">
                 <td class="label-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#6b7280;font-size:13px;font-weight:500;">Quantité</td>
-                <td class="value-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#111827;font-size:15px;font-weight:600;">${s.quantity} unité${s.quantity > 1 ? 's' : ''}</td>
+                <td class="value-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#111827;font-size:15px;font-weight:600;">${s.quantity} unité${parseInt(s.quantity) > 1 ? 's' : ''}</td>
               </tr>
               <tr>
                 <td class="label-col two-col" style="padding:12px 16px;color:#6b7280;font-size:13px;font-weight:500;vertical-align:top;">Message</td>

@@ -296,7 +296,7 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from,
       to: 'contact@africamions.com',
-      subject: `Nouveau message - ${s.subject} • ${s.name}`,
+      subject: `💬 Nouveau message - ${s.subject} • ${s.name}`,
       html: adminHtml,
       replyTo: email,
     });

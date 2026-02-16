@@ -334,7 +334,7 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from,
       to: 'contact@africamions.com',
-      subject: `Nouveau devis - ${s.model} • ${s.company} (${s.country})`,
+      subject: `🎉 Nouveau devis - ${s.model} • ${s.company} (${s.country})`,
       html: adminHtml,
     });
 

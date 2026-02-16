@@ -140,7 +140,7 @@ export async function POST(request: Request) {
             </table>
 
             <!-- Section Message -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;">
               <tr>
                 <td style="padding-bottom:12px;">
                   <h2 style="margin:0;color:#111827;font-size:18px;font-weight:700;">
@@ -158,10 +158,20 @@ export async function POST(request: Request) {
               </tr>
             </table>
 
-            <!-- CTA Répondre -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
+            <!-- Section CTA -->
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;">
               <tr>
-                <td align="center" style="padding:20px;background-color:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
+                <td style="padding-bottom:12px;">
+                  <h2 style="margin:0;color:#111827;font-size:18px;font-weight:700;">
+                    Actions
+                  </h2>
+                </td>
+              </tr>
+            </table>
+
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #bbf7d0;border-radius:8px;overflow:hidden;margin-bottom:28px;">
+              <tr>
+                <td align="center" style="padding:24px 20px;background-color:#f0fdf4;">
                   <p style="margin:0 0 16px;color:#166534;font-size:14px;font-weight:600;text-align:center;">Répondre à ${s.name} :</p>
                   <center>
                     <a href="mailto:${s.email}?subject=Re: ${encodeURIComponent(s.subject)}"

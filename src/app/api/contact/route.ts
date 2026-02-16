@@ -59,9 +59,9 @@ export async function POST(request: Request) {
       .two-col { display: block !important; width: 100% !important; }
       .label-col { width: 100% !important; display: block !important; padding: 8px 12px !important; font-weight: 600 !important; }
       .value-col { width: 100% !important; display: block !important; padding: 8px 12px 16px 12px !important; }
-      .cta-btn { padding: 14px 20px !important; font-size: 15px !important; width: 100% !important; max-width: 280px !important; display: block !important; margin: 10px auto !important; box-sizing: border-box !important; }
-      .cta-email { margin: 0 auto 10px auto !important; }
-      .cta-whatsapp { margin: 0 auto !important; }
+      .cta-btn { padding: 14px 20px !important; font-size: 15px !important; width: 100% !important; max-width: 280px !important; display: block !important; box-sizing: border-box !important; margin: 0 0 10px 0 !important; }
+      .cta-email { margin-bottom: 10px !important; }
+      .cta-whatsapp { margin-bottom: 0 !important; }
     }
   </style>
 </head>
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
       <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 16px auto;">
         <tr><td align="center">
           <div style="display:inline-block;background-color:#8B5CF6;color:#ffffff;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;letter-spacing:0.5px;">
-            💬 NOUVEAU MESSAGE DE CONTACT
+            NOUVEAU MESSAGE DE CONTACT
           </div>
         </td></tr>
       </table>
@@ -114,7 +114,7 @@ export async function POST(request: Request) {
               <tr>
                 <td style="padding-bottom:12px;">
                   <h2 style="margin:0;color:#111827;font-size:18px;font-weight:700;">
-                    👤 Coordonnées de l'expéditeur
+                    Coordonnées de l'expéditeur
                   </h2>
                 </td>
               </tr>
@@ -128,13 +128,13 @@ export async function POST(request: Request) {
               <tr>
                 <td class="label-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#6b7280;font-size:13px;font-weight:500;">Email</td>
                 <td class="value-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#111827;font-size:15px;">
-                  <a href="mailto:${s.email}" style="color:#0177ED;text-decoration:none;font-weight:600;">✉️ ${s.email}</a>
+                  <a href="mailto:${s.email}" style="color:#0177ED;text-decoration:none;font-weight:600;">${s.email}</a>
                 </td>
               </tr>
               <tr style="background-color:#f9fafb;">
                 <td class="label-col two-col" style="padding:12px 16px;color:#6b7280;font-size:13px;font-weight:500;">Téléphone</td>
                 <td class="value-col two-col" style="padding:12px 16px;color:#111827;font-size:15px;">
-                  ${s.phone ? `<a href="https://wa.me/${s.phone.replace(/[^0-9+]/g, '')}" style="color:#25D366;text-decoration:none;font-weight:600;">📱 ${s.phone}</a>` : '<span style="color:#9ca3af;font-style:italic;">Non renseigné</span>'}
+                  ${s.phone ? `<a href="https://wa.me/${s.phone.replace(/[^0-9+]/g, '')}" style="color:#25D366;text-decoration:none;font-weight:600;">${s.phone}</a>` : '<span style="color:#9ca3af;font-style:italic;">Non renseigné</span>'}
                 </td>
               </tr>
             </table>
@@ -144,7 +144,7 @@ export async function POST(request: Request) {
               <tr>
                 <td style="padding-bottom:12px;">
                   <h2 style="margin:0;color:#111827;font-size:18px;font-weight:700;">
-                    💬 Message
+                    Message
                   </h2>
                 </td>
               </tr>
@@ -161,22 +161,22 @@ export async function POST(request: Request) {
             <!-- CTA Répondre -->
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
               <tr>
-                <td align="center" style="padding:20px;background-color:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;text-align:center;">
+                <td align="center" style="padding:20px;background-color:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
                   <p style="margin:0 0 16px;color:#166534;font-size:14px;font-weight:600;text-align:center;">Répondre à ${s.name} :</p>
-                  <div style="text-align:center;">
+                  <center>
                     <a href="mailto:${s.email}?subject=Re: ${encodeURIComponent(s.subject)}"
                        class="cta-btn cta-email"
-                       style="display:inline-block;background-color:#0177ED;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(1,119,237,0.3);text-align:center;min-width:200px;margin:0 4px 8px 4px;">
-                      ✉️ Répondre par Email
+                       style="display:inline-block;background-color:#0177ED;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(1,119,237,0.3);text-align:center;min-width:200px;max-width:280px;margin:0 4px 10px 4px;">
+                      Répondre par Email
                     </a>
                     ${s.phone ? `
                     <a href="https://wa.me/${s.phone.replace(/[^0-9+]/g, '')}?text=${encodeURIComponent(`Bonjour ${s.name}, merci pour votre message. Nous avons bien reçu votre demande concernant "${s.subject}".`)}"
                        class="cta-btn cta-whatsapp"
-                       style="display:inline-block;background-color:#25D366;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(37,211,102,0.3);text-align:center;min-width:200px;margin:0 4px 8px 4px;">
-                      💬 WhatsApp
+                       style="display:inline-block;background-color:#25D366;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(37,211,102,0.3);text-align:center;min-width:200px;max-width:280px;margin:0 4px 10px 4px;">
+                      WhatsApp
                     </a>
                     ` : ''}
-                  </div>
+                  </center>
                 </td>
               </tr>
             </table>
@@ -186,8 +186,8 @@ export async function POST(request: Request) {
               <tr>
                 <td style="padding-top:20px;border-top:1px solid #e5e7eb;">
                   <p style="margin:0;color:#9ca3af;font-size:12px;line-height:1.6;">
-                    📅 Reçu le ${date}<br>
-                    🌐 IP : ${sanitize(ip)}
+                    Reçu le ${date}<br>
+                    IP : ${sanitize(ip)}
                   </p>
                 </td>
               </tr>
@@ -286,7 +286,7 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from,
       to: 'contact@africamions.com',
-      subject: `💬 Nouveau message - ${s.subject} • ${s.name}`,
+      subject: `Nouveau message - ${s.subject} • ${s.name}`,
       html: adminHtml,
       replyTo: email,
     });

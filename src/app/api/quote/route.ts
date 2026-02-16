@@ -70,7 +70,7 @@ export async function POST(request: Request) {
       .two-col { display: block !important; width: 100% !important; }
       .label-col { width: 100% !important; display: block !important; padding: 8px 12px !important; font-weight: 600 !important; }
       .value-col { width: 100% !important; display: block !important; padding: 8px 12px 16px 12px !important; }
-      .cta-btn { padding: 14px 20px !important; font-size: 15px !important; width: 100% !important; max-width: 280px !important; display: block !important; margin: 0 auto !important; box-sizing: border-box !important; }
+      .cta-btn { padding: 14px 20px !important; font-size: 15px !important; width: 100% !important; max-width: 280px !important; display: block !important; box-sizing: border-box !important; }
     }
   </style>
 </head>
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
       <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 16px auto;">
         <tr><td align="center">
           <div style="display:inline-block;background-color:#10B981;color:#ffffff;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;letter-spacing:0.5px;">
-            🎉 NOUVELLE DEMANDE DE DEVIS
+            NOUVELLE DEMANDE DE DEVIS
           </div>
         </td></tr>
       </table>
@@ -112,8 +112,8 @@ export async function POST(request: Request) {
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;">
               <tr>
                 <td style="padding-bottom:12px;">
-                  <h2 style="margin:0;color:#111827;font-size:18px;font-weight:700;display:flex;align-items:center;">
-                    👤 Informations du client
+                  <h2 style="margin:0;color:#111827;font-size:18px;font-weight:700;">
+                    Informations du client
                   </h2>
                 </td>
               </tr>
@@ -130,18 +130,18 @@ export async function POST(request: Request) {
               </tr>
               <tr style="background-color:#f9fafb;">
                 <td class="label-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#6b7280;font-size:13px;font-weight:500;">Pays</td>
-                <td class="value-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#111827;font-size:15px;">🌍 ${s.country}</td>
+                <td class="value-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#111827;font-size:15px;">${s.country}</td>
               </tr>
               <tr>
                 <td class="label-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#6b7280;font-size:13px;font-weight:500;">Téléphone / WhatsApp</td>
                 <td class="value-col two-col" style="padding:12px 16px;border-bottom:1px solid #e5e7eb;color:#111827;font-size:15px;">
-                  <a href="https://wa.me/${s.phone.replace(/[^0-9+]/g, '')}" style="color:#25D366;text-decoration:none;font-weight:600;">📱 ${s.phone}</a>
+                  <a href="https://wa.me/${s.phone.replace(/[^0-9+]/g, '')}" style="color:#25D366;text-decoration:none;font-weight:600;">${s.phone}</a>
                 </td>
               </tr>
               <tr style="background-color:#f9fafb;">
                 <td class="label-col two-col" style="padding:12px 16px;color:#6b7280;font-size:13px;font-weight:500;">Email</td>
                 <td class="value-col two-col" style="padding:12px 16px;color:#111827;font-size:15px;">
-                  <a href="mailto:${s.email}" style="color:#0177ED;text-decoration:none;">✉️ ${s.email}</a>
+                  <a href="mailto:${s.email}" style="color:#0177ED;text-decoration:none;">${s.email}</a>
                 </td>
               </tr>
             </table>
@@ -151,7 +151,7 @@ export async function POST(request: Request) {
               <tr>
                 <td style="padding-bottom:12px;">
                   <h2 style="margin:0;color:#111827;font-size:18px;font-weight:700;">
-                    🚛 Détails de la demande
+                    Détails de la demande
                   </h2>
                 </td>
               </tr>
@@ -181,19 +181,15 @@ export async function POST(request: Request) {
             <!-- CTA WhatsApp -->
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
               <tr>
-                <td align="center" style="padding:20px;background-color:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;text-align:center;">
-                  <p style="margin:0 0 12px;color:#166534;font-size:14px;font-weight:600;text-align:center;">Répondre rapidement au client :</p>
-                  <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
-                    <tr>
-                      <td align="center">
-                        <a href="https://wa.me/${s.phone.replace(/[^0-9+]/g, '')}?text=${encodeURIComponent(`Bonjour ${s.fullName}, merci pour votre demande de devis concernant ${s.model}. Nous préparons votre offre commerciale.`)}"
-                           class="cta-btn"
-                           style="display:inline-block;background-color:#25D366;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(37,211,102,0.3);text-align:center;">
-                          💬 Répondre sur WhatsApp
-                        </a>
-                      </td>
-                    </tr>
-                  </table>
+                <td align="center" style="padding:20px;background-color:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
+                  <p style="margin:0 0 16px;color:#166534;font-size:14px;font-weight:600;text-align:center;">Répondre rapidement au client :</p>
+                  <center>
+                    <a href="https://wa.me/${s.phone.replace(/[^0-9+]/g, '')}?text=${encodeURIComponent(`Bonjour ${s.fullName}, merci pour votre demande de devis concernant ${s.model}. Nous préparons votre offre commerciale.`)}"
+                       class="cta-btn"
+                       style="display:inline-block;background-color:#25D366;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(37,211,102,0.3);text-align:center;max-width:280px;">
+                      Répondre sur WhatsApp
+                    </a>
+                  </center>
                 </td>
               </tr>
             </table>
@@ -203,8 +199,8 @@ export async function POST(request: Request) {
               <tr>
                 <td style="padding-top:20px;border-top:1px solid #e5e7eb;">
                   <p style="margin:0;color:#9ca3af;font-size:12px;line-height:1.6;">
-                    📅 Reçu le ${date}<br>
-                    🌐 IP : ${sanitize(ip)}
+                    Reçu le ${date}<br>
+                    IP : ${sanitize(ip)}
                   </p>
                 </td>
               </tr>
@@ -328,7 +324,7 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from,
       to: 'contact@africamions.com',
-      subject: `🎉 Nouveau devis - ${s.model} • ${s.company} (${s.country})`,
+      subject: `Nouveau devis - ${s.model} • ${s.company} (${s.country})`,
       html: adminHtml,
     });
 

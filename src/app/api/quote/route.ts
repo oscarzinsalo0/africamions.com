@@ -70,7 +70,7 @@ export async function POST(request: Request) {
       .two-col { display: block !important; width: 100% !important; }
       .label-col { width: 100% !important; display: block !important; padding: 8px 12px !important; font-weight: 600 !important; }
       .value-col { width: 100% !important; display: block !important; padding: 8px 12px 16px 12px !important; }
-      .cta-btn { padding: 14px 20px !important; font-size: 15px !important; width: auto !important; display: inline-block !important; }
+      .cta-btn { padding: 14px 20px !important; font-size: 15px !important; width: 100% !important; max-width: 280px !important; display: block !important; margin: 0 auto !important; box-sizing: border-box !important; }
     }
   </style>
 </head>
@@ -181,13 +181,19 @@ export async function POST(request: Request) {
             <!-- CTA WhatsApp -->
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
               <tr>
-                <td align="center" style="padding:20px;background-color:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
-                  <p style="margin:0 0 12px;color:#166534;font-size:14px;font-weight:600;">Répondre rapidement au client :</p>
-                  <a href="https://wa.me/${s.phone.replace(/[^0-9+]/g, '')}?text=${encodeURIComponent(`Bonjour ${s.fullName}, merci pour votre demande de devis concernant ${s.model}. Nous préparons votre offre commerciale.`)}"
-                     class="cta-btn"
-                     style="display:inline-block;background-color:#25D366;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(37,211,102,0.3);">
-                    💬 Répondre sur WhatsApp
-                  </a>
+                <td align="center" style="padding:20px;background-color:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;text-align:center;">
+                  <p style="margin:0 0 12px;color:#166534;font-size:14px;font-weight:600;text-align:center;">Répondre rapidement au client :</p>
+                  <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
+                    <tr>
+                      <td align="center">
+                        <a href="https://wa.me/${s.phone.replace(/[^0-9+]/g, '')}?text=${encodeURIComponent(`Bonjour ${s.fullName}, merci pour votre demande de devis concernant ${s.model}. Nous préparons votre offre commerciale.`)}"
+                           class="cta-btn"
+                           style="display:inline-block;background-color:#25D366;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(37,211,102,0.3);text-align:center;">
+                          💬 Répondre sur WhatsApp
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
               </tr>
             </table>

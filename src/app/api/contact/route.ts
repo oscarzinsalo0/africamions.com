@@ -59,7 +59,9 @@ export async function POST(request: Request) {
       .two-col { display: block !important; width: 100% !important; }
       .label-col { width: 100% !important; display: block !important; padding: 8px 12px !important; font-weight: 600 !important; }
       .value-col { width: 100% !important; display: block !important; padding: 8px 12px 16px 12px !important; }
-      .cta-btn { padding: 14px 20px !important; font-size: 15px !important; width: auto !important; display: inline-block !important; }
+      .cta-btn { padding: 14px 20px !important; font-size: 15px !important; width: 100% !important; max-width: 280px !important; display: block !important; margin: 10px auto !important; box-sizing: border-box !important; }
+      .cta-email { margin: 0 auto 10px auto !important; }
+      .cta-whatsapp { margin: 0 auto !important; }
     }
   </style>
 </head>
@@ -159,20 +161,22 @@ export async function POST(request: Request) {
             <!-- CTA Répondre -->
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
               <tr>
-                <td align="center" style="padding:20px;background-color:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
-                  <p style="margin:0 0 12px;color:#166534;font-size:14px;font-weight:600;">Répondre à ${s.name} :</p>
-                  <a href="mailto:${s.email}?subject=Re: ${encodeURIComponent(s.subject)}"
-                     class="cta-btn"
-                     style="display:inline-block;background-color:#0177ED;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(1,119,237,0.3);margin-right:8px;">
-                    ✉️ Répondre par Email
-                  </a>
-                  ${s.phone ? `
-                  <a href="https://wa.me/${s.phone.replace(/[^0-9+]/g, '')}?text=${encodeURIComponent(`Bonjour ${s.name}, merci pour votre message. Nous avons bien reçu votre demande concernant "${s.subject}".`)}"
-                     class="cta-btn"
-                     style="display:inline-block;background-color:#25D366;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(37,211,102,0.3);">
-                    💬 WhatsApp
-                  </a>
-                  ` : ''}
+                <td align="center" style="padding:20px;background-color:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;text-align:center;">
+                  <p style="margin:0 0 16px;color:#166534;font-size:14px;font-weight:600;text-align:center;">Répondre à ${s.name} :</p>
+                  <div style="text-align:center;">
+                    <a href="mailto:${s.email}?subject=Re: ${encodeURIComponent(s.subject)}"
+                       class="cta-btn cta-email"
+                       style="display:inline-block;background-color:#0177ED;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(1,119,237,0.3);text-align:center;min-width:200px;margin:0 4px 8px 4px;">
+                      ✉️ Répondre par Email
+                    </a>
+                    ${s.phone ? `
+                    <a href="https://wa.me/${s.phone.replace(/[^0-9+]/g, '')}?text=${encodeURIComponent(`Bonjour ${s.name}, merci pour votre message. Nous avons bien reçu votre demande concernant "${s.subject}".`)}"
+                       class="cta-btn cta-whatsapp"
+                       style="display:inline-block;background-color:#25D366;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:16px;font-weight:600;box-shadow:0 2px 8px rgba(37,211,102,0.3);text-align:center;min-width:200px;margin:0 4px 8px 4px;">
+                      💬 WhatsApp
+                    </a>
+                    ` : ''}
+                  </div>
                 </td>
               </tr>
             </table>

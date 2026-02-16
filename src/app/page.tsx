@@ -115,7 +115,7 @@ export default function Home() {
                 style={{ marginTop: '48px', gap: '48px' }}
               >
                 <div>
-                  <p className="r-stats-number" style={{ fontSize: '2.2rem', fontWeight: '800', color: '#0A0A0A' }}>1 500+</p>
+                  <p className="r-stats-number" style={{ fontSize: '2.2rem', fontWeight: '800', color: '#0A0A0A' }}>900+</p>
                   <p className="r-stats-label" style={{ fontSize: '0.875rem', color: '#9CA3AF', marginTop: '4px' }}>Véhicules vendus</p>
                 </div>
                 <div className="r-stats-divider" style={{ width: '1px', height: '48px', background: '#E5E7EB' }}></div>
@@ -125,7 +125,7 @@ export default function Home() {
                 </div>
                 <div className="r-stats-divider" style={{ width: '1px', height: '48px', background: '#E5E7EB' }}></div>
                 <div>
-                  <p className="r-stats-number" style={{ fontSize: '2.2rem', fontWeight: '800', color: '#0A0A0A' }}>80+</p>
+                  <p className="r-stats-number" style={{ fontSize: '2.2rem', fontWeight: '800', color: '#0A0A0A' }}>10+</p>
                   <p className="r-stats-label" style={{ fontSize: '0.875rem', color: '#9CA3AF', marginTop: '4px' }}>Experts</p>
                 </div>
               </div>
